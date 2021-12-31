@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bluex-gitlab:
-    image: gitlab/gitlab-ce:13.10.3-ce.0
+    image: gitlab/gitlab-ce:14.4.4-ce.0
     restart: always
     container_name: gitlab
     hostname: 'git.bluex.fr'
