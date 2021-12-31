@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  bluex-gitlab:
+    image: gitlab/gitlab-ce:13.10.3-ce.0
+    restart: always
+    hostname: 'git.bluex.fr'
+    volumes:
+      - gitlab_data:/etc/gitlab
+    ports:
+      - '8090:80'
+      - '2222:22'
+    networks:
+      - bluex-traefik-network
+volumes:
+  gitlab_data:
+networks:
+  bluex-traefik-network:
+    external: true
