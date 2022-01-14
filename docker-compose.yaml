@@ -1,15 +1,21 @@
-version: '3'
-
+version: "3.3"
 services:
-  bluex-gitlab:
-    image: gitlab/gitlab-ce:14.4.4-ce.0
-    restart: always
+  gitlab:
+    image: gitlab/gitlab-ee
+    restart: unless-stopped
     container_name: gitlab
-    hostname: 'git.bluex.fr'
+    hostname: 'git.interiut2022.fr'
     volumes:
-      - gitlab_data:/etc/gitlab
+      - ./volumes/gitlab/etc:/etc/gitlab
+      - ./volumes/gitlab/logs:/var/log/gitlab
+      - ./volumes/gitlab/opt:/var/opt/gitlab
     ports:
-      - '8090:80'
-      - '2222:22'
-volumes:
-  gitlab_data:
+      - 2222:22
+  runners:
+    image: gitlab/gitlab-runner
+    restart: unless-stopped
+    volumes:
+      - ./volumes/gitlab-runners/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
