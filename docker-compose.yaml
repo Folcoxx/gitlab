@@ -10,7 +10,8 @@ services:
       - ./volumes/gitlab/logs:/var/log/gitlab
       - ./volumes/gitlab/opt:/var/opt/gitlab
     ports:
-      - 2222:22
+      - '8090:80'
+      - '2222:22'
   runners:
     image: gitlab/gitlab-runner
     restart: unless-stopped
